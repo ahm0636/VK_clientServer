@@ -35,7 +35,7 @@
 		679F55EA27F3250800DC7DA1 /* SecondCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCellTableViewCell.swift; sourceTree = "<group>"; };
 		679F55ED27F3432A00DC7DA1 /* MatesDetailedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatesDetailedCollectionViewCell.swift; sourceTree = "<group>"; };
 		679F55FB27FC517C00DC7DA1 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
-		67FA5B2F27D767D00029D091 /* VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67FA5B2F27D767D00029D091 /* VK_A.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VK_A.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67FA5B3227D767D10029D091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67FA5B3427D767D10029D091 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		67FA5B3627D767D10029D091 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		67FA5B3027D767D00029D091 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				67FA5B2F27D767D00029D091 /* VK.app */,
+				67FA5B2F27D767D00029D091 /* VK_A.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,9 +132,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		67FA5B2E27D767D00029D091 /* VK */ = {
+		67FA5B2E27D767D00029D091 /* VK_A */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 67FA5B4327D767D60029D091 /* Build configuration list for PBXNativeTarget "VK" */;
+			buildConfigurationList = 67FA5B4327D767D60029D091 /* Build configuration list for PBXNativeTarget "VK_A" */;
 			buildPhases = (
 				67FA5B2B27D767D00029D091 /* Sources */,
 				67FA5B2C27D767D00029D091 /* Frameworks */,
@@ -144,9 +144,9 @@
 			);
 			dependencies = (
 			);
-			name = VK;
+			name = VK_A;
 			productName = VK;
-			productReference = 67FA5B2F27D767D00029D091 /* VK.app */;
+			productReference = 67FA5B2F27D767D00029D091 /* VK_A.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -164,7 +164,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 67FA5B2A27D767D00029D091 /* Build configuration list for PBXProject "VK" */;
+			buildConfigurationList = 67FA5B2A27D767D00029D091 /* Build configuration list for PBXProject "VK_A" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -177,7 +177,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				67FA5B2E27D767D00029D091 /* VK */,
+				67FA5B2E27D767D00029D091 /* VK_A */,
 			);
 		};
 /* End PBXProject section */
@@ -411,7 +411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		67FA5B2A27D767D00029D091 /* Build configuration list for PBXProject "VK" */ = {
+		67FA5B2A27D767D00029D091 /* Build configuration list for PBXProject "VK_A" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				67FA5B4127D767D60029D091 /* Debug */,
@@ -420,7 +420,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		67FA5B4327D767D60029D091 /* Build configuration list for PBXNativeTarget "VK" */ = {
+		67FA5B4327D767D60029D091 /* Build configuration list for PBXNativeTarget "VK_A" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				67FA5B4427D767D60029D091 /* Debug */,
