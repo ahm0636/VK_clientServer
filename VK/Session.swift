@@ -13,7 +13,6 @@ class Session {
 
     static let instance = Session()
 
-
     var token = "" // token storage
     var id = 0 // User ID storage
 
