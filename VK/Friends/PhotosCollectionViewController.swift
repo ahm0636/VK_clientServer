@@ -9,20 +9,20 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class MyCollectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+class PhotosCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
 
     var matesPhotosArray: [Photo?] = []
 
-    let allFriends = User.allMates
+    var allFriends = User.allMates
+
+    var friendIndex: Int = 0
 
 
     var friend: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
     }
 
@@ -33,22 +33,18 @@ class MyCollectionCollectionViewController: UICollectionViewController, UICollec
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return friend.photo.count
+        return allFriends[friendIndex].photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? MatesDetailedCollectionViewCell
-
-
-        cell?.imageView.image =  UIImage(named: friend.photo[indexPath.row].photo)
-
-//        cell?.friendsName.text = friend.name
-
+        let photo = allFriends[friendIndex].photos[indexPath.row]
+        cell?.imageView.image =  UIImage(named: photo.photo)
+        cell?.likeControl.isSelected = photo.isLiked
+        cell?.photoDidLiked = { isSelected in
+            self.allFriends[self.friendIndex].photos[indexPath.row].isLiked = isSelected
+        }
 
         return cell ?? UICollectionViewCell()
     }
@@ -58,8 +54,10 @@ class MyCollectionCollectionViewController: UICollectionViewController, UICollec
         return true
     }
 
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width / 2, height: self.view.frame.width / 2 )
+        return CGSize(width: 300, height: 300)
+//        CGSize(width: self.view.frame.width / 2, height: self.view.frame.width / 2 )
     }
 
 }

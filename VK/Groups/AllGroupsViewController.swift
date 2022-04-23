@@ -22,6 +22,7 @@ class AllGroupsViewController: UITableViewController {
     var myGroups: [Group] = []
     let allGroups = Group.allGroups
 
+    @IBOutlet weak var searchBar2: UISearchBar!
     var groupedGroups: [GroupedGroup] {
         var result = [GroupedGroup]()
 
@@ -43,6 +44,7 @@ class AllGroupsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar2.delegate = self
 
     }
 
@@ -63,12 +65,14 @@ class AllGroupsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AllGroupsTableViewCell
         let groupedGroup = groupedGroups[indexPath.section]
         let group = groupedGroup.groups[indexPath.row]
-        cell.textLabel?.text = group.name
-        cell.detailTextLabel?.text = group.groupDescription
-        return cell
+        cell?.allGroupsName.text = group.name
+        cell?.detailTextLabel?.text = group.groupDescription
+        cell?.allGroupsPhoto.image = UIImage(named: allGroups[indexPath.row].avatar)
+//        cell?.groupPhoto.image = UIImage(named: allGroups[indexPath.row].avatar)
+        return cell ?? UITableViewCell()
     }
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -102,5 +106,11 @@ class AllGroupsViewController: UITableViewController {
 
         return UISwipeActionsConfiguration(actions: [action])
     }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        80
+    }
 
+}
+extension AllGroupsViewController: UISearchBarDelegate {
+    
 }

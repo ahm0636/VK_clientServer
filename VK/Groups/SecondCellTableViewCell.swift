@@ -14,6 +14,9 @@ class SecondCellTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.groupPhoto.clipsToBounds = true
+        self.groupPhoto.layer.masksToBounds = true
+        self.groupPhoto.layer.cornerRadius = groupPhoto.frame.height / 2
         // Initialization code
     }
 

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginPageController: UIViewController, UITextFieldDelegate {
 
+    let session = Session.instance  // singleton for storing data about the current session
 
     @IBOutlet weak var scrollView: UIScrollView!
 
@@ -43,6 +44,8 @@ class ViewController: UIViewController {
         scrollView?.contentInset = contentInsets
         scrollView?.scrollIndicatorInsets = contentInsets
     }
+    
+
     //Когда клавиатура исчезает
     @objc func keyboardWillBeHidden(notification: Notification) {
         // Устанавливаем отступ внизу UIScrollView, равный 0
@@ -62,6 +65,7 @@ class ViewController: UIViewController {
                                                 #selector(self.keyboardWillBeHidden(notification:)), name:
                                                 UIResponder.keyboardWillHideNotification, object: nil)
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name:

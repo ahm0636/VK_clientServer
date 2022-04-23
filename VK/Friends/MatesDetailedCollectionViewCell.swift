@@ -13,6 +13,7 @@ class MatesDetailedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeControl: LikeControl!
 
     @IBOutlet weak var imageView: UIImageView!
+    var photoDidLiked: ((Bool) -> Void)?
     
 
     override func awakeFromNib() {
@@ -24,6 +25,6 @@ class MatesDetailedCollectionViewCell: UICollectionViewCell {
 
     @objc func likeControlTapped() {
         likeControl.isSelected = !likeControl.isSelected
-
+        photoDidLiked?(likeControl.isSelected)
     }
 }

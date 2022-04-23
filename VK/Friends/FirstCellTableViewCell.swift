@@ -20,13 +20,25 @@ class FirstCellTableViewCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userImage: UIImageView!
 
+    @IBOutlet weak var viewForImage: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userImage.contentMode = .scaleAspectFill
+        self.viewForImage.layer.masksToBounds = true
+        self.viewForImage.layer.cornerRadius = viewForImage.frame.height / 2
 
+        viewForImage.backgroundColor = .clear
+        viewForImage.layer.shadowOffset = CGSize.zero
+        viewForImage.layer.shadowOpacity = 0.5
+        viewForImage.layer.borderColor = UIColor.black.cgColor
         self.userImage.clipsToBounds = true
+        self.userImage.layer.masksToBounds = true
+        self.userImage.layer.cornerRadius = userImage.frame.height / 2
+
     }
+
+
 //
 //        likeButton.addTarget(
 //            self, action: #selector(handleHeartButtonTap(_:)), for: .touchUpInside)
