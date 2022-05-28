@@ -49,7 +49,7 @@ struct Photo {
 struct User {
     let name: String
     let profileType: ProfileType.RawValue
-    let id = UUID()
+    let id: String
     var photos: [Photo]
     let avatar: String
     let groups: [Group]
@@ -73,14 +73,14 @@ extension News {
 
 extension User {
     static let allMates: [User] = [
-        User(name: "Susan", profileType: "Advanced", photos: [Photo(photo: "man_photo",
+        User(name: "Susan", profileType: "Advanced", id: "", photos: [Photo(photo: "man_photo",
                                                                    name: "ph", isLiked: false), Photo(photo: "heart", name: "2 photo", isLiked: false)], avatar: "meme", groups: [Group(id: "1", avatar: "meme", groupDescription: "Susan's group", numberOfMembers: 23, name: "BBC", isPrivate: true, photo: [Photo(photo: "sherry-christian-8Myh76_3M2U-unsplash.jpg", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "Rock", profileType: "Advanced", photos: [Photo(photo: "heart", name: "ph", isLiked: false)], avatar: "male_photo", groups: [Group(id: "2", avatar: "heart", groupDescription: "Rock's group", numberOfMembers: 23, name: "2", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "Swift", profileType: "Advanced", photos: [Photo(photo: "first photo", name: "ph", isLiked: false)], avatar: "man_photo", groups: [Group(id: "3", avatar: "meme", groupDescription: "Swift's group", numberOfMembers: 23, name: "4", isPrivate: true, photo: [Photo(photo: "second photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "Doks", profileType: "Advanced", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "man_photo", groups: [Group(id: "4", avatar: "heart", groupDescription: "Doks group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "Karl", profileType: "Advanced", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "heart", groups: [Group(id: "5", avatar: "", groupDescription: "Karl's group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "Rocky", profileType: "Advanced", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "VKimage", groups: [Group(id: "6", avatar: "meme", groupDescription: "Rocky's group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
-        User(name: "KOSTAS", profileType: "Advanced", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "male_photo", groups: [Group(id: "7", avatar: "meme", groupDescription: "Kos group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News")
+        User(name: "Rock", profileType: "Advanced", id: "", photos: [Photo(photo: "heart", name: "ph", isLiked: false)], avatar: "male_photo", groups: [Group(id: "2", avatar: "heart", groupDescription: "Rock's group", numberOfMembers: 23, name: "2", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
+        User(name: "Swift", profileType: "Advanced", id: "", photos: [Photo(photo: "first photo", name: "ph", isLiked: false)], avatar: "man_photo", groups: [Group(id: "3", avatar: "meme", groupDescription: "Swift's group", numberOfMembers: 23, name: "4", isPrivate: true, photo: [Photo(photo: "second photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
+        User(name: "Doks", profileType: "Advanced", id: "", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "man_photo", groups: [Group(id: "4", avatar: "heart", groupDescription: "Doks group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
+        User(name: "Karl", profileType: "Advanced", id: "", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "heart", groups: [Group(id: "5", avatar: "", groupDescription: "Karl's group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
+        User(name: "Rocky", profileType: "Advanced", id: "", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "VKimage", groups: [Group(id: "6", avatar: "meme", groupDescription: "Rocky's group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News"),
+        User(name: "KOSTAS", profileType: "Advanced", id: "", photos: [Photo(photo: "fourth photo", name: "ph", isLiked: false)], avatar: "male_photo", groups: [Group(id: "7", avatar: "meme", groupDescription: "Kos group", numberOfMembers: 23, name: "B5", isPrivate: true, photo: [Photo(photo: "BBC photo", name: "ph", isLiked: false)])], age: 34, surname: "Su", aboutMe: "News")
     ]
 }
 

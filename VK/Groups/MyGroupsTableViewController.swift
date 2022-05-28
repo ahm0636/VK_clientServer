@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsTableViewController: UITableViewController {
 
@@ -43,9 +44,14 @@ class MyGroupsTableViewController: UITableViewController {
 
         sectionTitle = Array(Set(groups.compactMap({String($0.prefix(1))})))
         sectionTitle.sort()
-//        sectionTitle.forEach({groupDict[$0] = [String]()})
         sectionTitle.forEach({groupDict[$0] = [String]()})
         groups.forEach({groupDict[String($0.prefix(1))]?.append($0)})
+
+
+        // load from Realm new objects
+        GetGroupsList().loadData() {
+            [weak self] () in self?.loadGroupsFromRealm()
+        }
 
     }
 
@@ -60,7 +66,6 @@ class MyGroupsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as? SecondCellTableViewCell
 //        let group = allGroups[indexPath.row]
         let group = displayedGroups[indexPath.row]
-//        cell?.groupName.text = groupDict[sectionTitle[indexPath.section]]?[indexPath.row]
         cell?.groupName.text = group.name
 
         cell?.groupPhoto.image = UIImage(named: group.avatar)
@@ -82,6 +87,20 @@ class MyGroupsTableViewController: UITableViewController {
 
         }
     }
+    // MARK: - CUSTOM FUNCTIONS
+    func loadGroupsFromRealm() {
+        do {
+            let realm = try Realm()
+            let groupsFromreal = realm.objects(Groupp.self)
+            // check whether group exists or not
+            guard groupsFromreal.count != 0 else {return}
+            //
+            tableView.reloadData()
+        } catch {
+            print(error)
+        }
+    }
+    
 }
 
 extension MyGroupsTableViewController: AllGroupsViewControllerDelegate {
@@ -120,3 +139,4 @@ extension MyGroupsTableViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+
