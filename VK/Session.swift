@@ -8,12 +8,24 @@
 import Foundation
 
 
+struct Session {
+
+    private init() {}
+
+    static var instance = Session()
+
+    
+    var token: String = ""
+    var userID: Int = 0
+}
+
+/*
 class Session {
     private init() {}
 
     static let instance = Session()
 
     var token = "" // token storage
-    var id = 0 // User ID storage
+    var userId = 0 // User ID storage
 
-}
+}*/
