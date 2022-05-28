@@ -9,6 +9,7 @@ import Foundation
 
 import RealmSwift
 
+
 class Friend: Object {
     @objc dynamic var friendName: String = ""
     @objc dynamic var friendAvatar: String = ""
