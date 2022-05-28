@@ -144,15 +144,14 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - NAVIGATION
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showListUsersPhoto"{
-            // ссылка объект на контроллер с которого переход
+            // reference object to the controller from which the transition happens
             guard let friend = segue.destination as? PhotosCollectionViewController else { return }
 
             // индекс нажатой ячейки
             if let indexPath = tableView.indexPathForSelectedRow {
-                friend.title = getPhotosFriend(indexPath) as! String //screen title (username)
-
-//                friend.userID = getFriendID(indexPath)
-//                friend.collectionPhotos = getPhotosFriend(indexPath) // все фотки пользователя
+                friend.title = getPhotosFriend(indexPath) as? String //screen title (username)
+                friend.ownerID = getFriendID(indexPath)
+//                friend.collectionPhotos = getPhotosFriend(indexPath) // all friend's photos
             }
         }
     }

@@ -47,7 +47,6 @@ class MyGroupsTableViewController: UITableViewController {
         sectionTitle.forEach({groupDict[$0] = [String]()})
         groups.forEach({groupDict[String($0.prefix(1))]?.append($0)})
 
-
         // load from Realm new objects
         GetGroupsList().loadData() {
             [weak self] () in self?.loadGroupsFromRealm()
@@ -88,13 +87,13 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     // MARK: - CUSTOM FUNCTIONS
+
     func loadGroupsFromRealm() {
         do {
             let realm = try Realm()
             let groupsFromreal = realm.objects(Groupp.self)
             // check whether group exists or not
             guard groupsFromreal.count != 0 else {return}
-            //
             tableView.reloadData()
         } catch {
             print(error)

@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+
 class Photoo: Object {
     @objc dynamic var photo: String = ""
     @objc dynamic var ownerID: String  = ""

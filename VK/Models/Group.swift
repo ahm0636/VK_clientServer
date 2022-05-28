@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 
+
 class Groupp: Object {
     @objc dynamic var groupName: String = ""
     @objc dynamic var groupPhoto: String = ""

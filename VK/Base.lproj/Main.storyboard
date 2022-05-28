@@ -771,22 +771,6 @@
                                     <segue destination="9ws-rl-wW3" kind="show" id="Uf1-fp-7JI"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="PbJ-B1-uvF">
-                                <rect key="frame" x="39" y="329" width="336" height="319"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Gg-P2-5wQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="336" height="319"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hg6-MR-B5B">
-                                <rect key="frame" x="39" y="658" width="336" height="319"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="LJY-ON-6PC">
-                                    <rect key="frame" x="0.0" y="0.0" width="336" height="319"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="l3S-A9-0wZ" id="aKw-fK-06w"/>

@@ -10,6 +10,8 @@ import RealmSwift
 
 class RealmOperations {
 
+
+    // MARK: - CUSTOM FUNCTIONS
     // saving photos
     func savePhotosToRealm(_ photoList: [Photoo], _ ownerID: String) {
         do {
@@ -37,6 +39,7 @@ class RealmOperations {
             print(error)
         }
     }
+
 
     // saving friends
     func saveFriendsToRealm(_ friendList: [Friend]) {
