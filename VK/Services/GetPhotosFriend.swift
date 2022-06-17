@@ -57,6 +57,7 @@ class GetPhotosFriend {
                 URLQueryItem(name: "v", value: "5.122")
             ]
 
+
             // tast to run
             let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
                 //print("Запрос к API: \(urlConstructor.url!)")
@@ -68,7 +69,13 @@ class GetPhotosFriend {
                     for i in 0...arrayPhotosFriend.response.items.count-1 {
                         if let urlPhoto = arrayPhotosFriend.response.items[i].sizes.last?.url {
                             ownerID = String(arrayPhotosFriend.response.items[i].ownerID)
-                            photosFriend.append(Photoo.init(photo: urlPhoto, ownerID: ownerID))
+                            let realmPost = Photoo()
+                            realmPost.photo = urlPhoto
+                            realmPost.ownerID = ownerID
+
+                            photosFriend.append(realmPost)
+
+                            print("-------------------------------\(photosFriend)")
                         }
                     }
                     DispatchQueue.main.async {

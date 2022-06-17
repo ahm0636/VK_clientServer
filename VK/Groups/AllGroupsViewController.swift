@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct GroupedGroup {
     let character: Character
@@ -19,8 +20,24 @@ protocol AllGroupsViewControllerDelegate {
 
 class AllGroupsViewController: UITableViewController {
 
+    // MARK: - ATTRIBUTES
+    var realm: Realm = {
+        let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: config)
+        return realm
+    }()
+
+    lazy var groupsFromRealm: Results<Groupp> = {
+        return realm.objects(Groupp.self)
+    }()
+
+    var notifToken: NotificationToken?
+
+
     var myGroups: [Group] = []
     let allGroups = Group.allGroups
+
+    var groups: [Groupp] = []
 
     @IBOutlet weak var searchBar2: UISearchBar!
     var groupedGroups: [GroupedGroup] {
@@ -110,7 +127,68 @@ class AllGroupsViewController: UITableViewController {
         80
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            do {
+                try realm.write {
+                    realm.delete(groupsFromRealm.filter("groupName == ", groups[indexPath.row].groupName))
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+
+
 }
 extension AllGroupsViewController: UISearchBarDelegate {
     
+}
+
+extension AllGroupsViewController {
+
+    func subscribeToNotifRealm() {
+        notifToken = groupsFromRealm.observe { [weak self] (changes) in
+            switch changes {
+            case .initial:
+                self?.loadGroupsFromRealm()
+            case .update:
+                self?.loadGroupsFromRealm()
+            case let .error(error):
+                print(error)
+            }
+        }
+    }
+
+    func loadGroupsFromRealm() {
+            groups = Array(groupsFromRealm)
+            guard groupsFromRealm.count != 0 else { return }
+            tableView.reloadData()
+    }
+
+    @IBAction func addNewGroup(segue: UIStoryboardSegue) {
+        if segue.identifier == "AddGroup" {
+                        // ссылка объект на контроллер с которого переход
+                        guard let newGroupFromController = segue.source as? NewGroupTableViewController else { return }
+                        // проверка индекса ячейки
+                        if let indexPath = newGroupFromController.tableView.indexPathForSelectedRow {
+                            //добавить новой группы в мои группы из общего списка групп
+//                            let newGroup = newGroupFromController.GroupsList[indexPath.row]
+
+            //                // проверка что группа уже в списке (нужен Equatable)
+//                            guard myGroups.description.contains(newGroup.groupName) == false else { return }
+
+                            //myGroups.append(newGroup)
+
+                            //  добавление новой группы в реалм
+                            do {
+                                try realm.write{
+//                                    realm.add(newGroup)
+                                }
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }
+    }
 }

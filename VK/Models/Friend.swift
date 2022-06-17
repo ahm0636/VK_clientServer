@@ -10,16 +10,7 @@ import Foundation
 import RealmSwift
 
 class Friend: Object {
-    @objc dynamic var friendName: String = ""
-    @objc dynamic var friendAvatar: String = ""
-
-    init(friendName: String, friendAvatar: String) {
-        self.friendName = friendName
-        self.friendAvatar = friendAvatar
-    }
-
-    required init() {
-        fatalError("init() has not been implemented")
-    }
-
+    @Persisted var friendName: String
+    @Persisted var friendAvatar: String
+    @Persisted var ownerID: String
 }

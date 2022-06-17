@@ -52,4 +52,16 @@ class RealmOperations {
         }
     }
 
+    //
+    func deleteFromRealm() {
+        do {
+            let realm = try Realm()
+            try realm.write{
+                realm.deleteAll()
+            }
+        } catch {
+            print(error)
+        }
+    }
+
 }

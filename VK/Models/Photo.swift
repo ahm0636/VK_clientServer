@@ -9,15 +9,17 @@ import Foundation
 import RealmSwift
 
 class Photoo: Object {
-    @objc dynamic var photo: String = ""
-    @objc dynamic var ownerID: String  = ""
 
-    init(photo: String, ownerID: String) {
-        self.photo = photo
-        self.ownerID = ownerID
-    }
+    // updated
+    @Persisted var photo: String
+    @Persisted var ownerID: String
 
-    required init() {
-        fatalError("init() has not been implemented")
-    }
+//    init(photo: String, ownerID: String) {
+//        self.photo = photo
+//        self.ownerID = ownerID
+//    }
+//
+//    required init() {
+//        fatalError("init() has not been implemented")
+//    }
 }

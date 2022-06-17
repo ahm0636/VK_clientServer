@@ -18,16 +18,19 @@ struct GroupsResponse:  Decodable {
         struct Item: Decodable {
             var name: String
             var logo: String
+            var id: Int
 
             enum CodingKeys: String, CodingKey {
                 case name
                 case logo = "photo_50"
+                case id
             }
 
             init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
                 name = try container.decode(String.self, forKey: .name)
                 logo = try container.decode(String.self, forKey: .logo)
+                id = try container.decode(Int.self, forKey: .id)
             }
         }
     }
@@ -69,7 +72,12 @@ class GetGroupsList {
                 for i in 0...arrayGroups.response.items.count-1 {
                     let name = ((arrayGroups.response.items[i].name))
                     let logo = arrayGroups.response.items[i].logo
-                    groupList.append(Groupp.init(groupName: name, groupPhoto: logo))
+
+                    let test = Groupp()
+                    test.groupName = name
+                    test.groupPhoto = logo
+
+                    groupList.append(test)
                 }
 
                 DispatchQueue.main.async {

@@ -9,16 +9,6 @@ import Foundation
 import RealmSwift
 
 class Groupp: Object {
-    @objc dynamic var groupName: String = ""
-    @objc dynamic var groupPhoto: String = ""
-
-    init(groupName: String, groupPhoto: String) {
-        self.groupName = groupName
-        self.groupPhoto = groupPhoto
-    }
-
-    required init() {
-        fatalError("init() has not been implemented")
-    }
-
+    @Persisted var groupName: String = ""
+    @Persisted var groupPhoto: String = ""
 }

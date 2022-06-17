@@ -7,26 +7,21 @@
 
 import UIKit
 import CoreGraphics
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
 
 
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var zoomedPhoto: UIImageView!
 
     enum ForceState {
         case reset, activated, confirmed
     }
 
-    private let resetForce: CGFloat = 0.4
-    private let activationForce: CGFloat = 0.5
-    private let confirmationForce: CGFloat = 0.49
-    private let activationFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-    private let confirmationFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-
-    @IBOutlet weak var zoomedPhoto: UIImageView!
-
-
     // MARK: - ATTRIBUTES
+
+    var listOfFriends: [Friend] = []
 
     let allFriends = User.allMates
 
@@ -37,10 +32,19 @@ class FriendsTableViewController: UITableViewController {
     var namesListModified: [String] = []
     var namesListFixed: [String] = []
     var lettersOfNames: [String] = []
+
     //contains key and friend array
     var friendDict = [String:[String]]()
 
+    private let resetForce: CGFloat = 0.4
+    private let activationForce: CGFloat = 0.5
+    private let confirmationForce: CGFloat = 0.49
+    private let activationFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    private let confirmationFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
 
+    var currentIndex: Int = 0
+
+    // MARK: - CUSTOM FUNCTIONS
     // array of usernames
     func makeNamesList() {
         namesListFixed.removeAll()
@@ -108,6 +112,22 @@ class FriendsTableViewController: UITableViewController {
         return userID
     }
 
+    //
+
+    var notifToken: NotificationToken?
+
+    lazy var friendsFromRealm: Results<Friend> = {
+        return realm.objects(Friend.self)
+    }()
+
+    var realm: Realm = {
+        let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: configuration)
+        return realm
+    }()
+
+
+    // MARK: - SYSTEM FUNCTIONS
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,10 +137,11 @@ class FriendsTableViewController: UITableViewController {
 
         // Вывод json в консоль
         DataFromVK().loadData(.usernamesAndAvatars)
+
+        subscribeToNotificationRealm()
     }
 
-    // MARK: - SYSTEM FUNCTIONS
-
+    // MARK: - TableView FUNCTIONS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var countRows = 0
 
@@ -132,13 +153,67 @@ class FriendsTableViewController: UITableViewController {
         return countRows
     }
 
-    var currentIndex: Int = 0
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         self.currentIndex = indexPath.row
         self.performSegue(withIdentifier: "showDetails", sender: self)
         
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstCellTableViewCell
+
+        cell?.textLabel?.textColor = .white
+        cell?.userName.text = getFriendNameForCell(indexPath)
+//        cell?.userName.text = getFriendNameForCell(indexPath)
+        if let userImgURL = getAvatarFriendForCell(indexPath) {
+            cell?.userImage.image = UIImage(named: userImgURL)
+//            cell?.userImage.load(url: userImgURL)
+        }
+//        cell?.userImage.image = UIImage(named: getAvatarFriendForCell(indexPath))
+
+
+        return cell ?? UITableViewCell()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cell = tableView.cellForRow(at: indexPath)
+        return cell?.frame.height ?? 80
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+
+        let letter: UILabel = UILabel(frame: CGRect(x: 30, y: 5, width: 20, height: 20))
+        letter.textColor = UIColor.black.withAlphaComponent(0.5)
+        letter.text = lettersOfNames[section]
+        letter.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
+        header.addSubview(letter)
+
+        return header
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        sectionTitle[section]
+    }
+
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return lettersOfNames
+    }
+
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        lettersOfNames.count
+
+    }
+
+    func frameForCellAtIndexPath(_ indexPath: IndexPath) -> CGRect {
+        let cell = self.tableView.cellForRow(at: indexPath) as! FirstCellTableViewCell
+
+        let profileImageFrame = cell.userImage.frame
+
+        return profileImageFrame
     }
 
     // MARK: - NAVIGATION
@@ -171,63 +246,6 @@ class FriendsTableViewController: UITableViewController {
 //        photosViewController.friendIndex = indexPath.row
 //
 //    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? FirstCellTableViewCell
-
-        cell?.textLabel?.textColor = .white
-        cell?.userName.text = getFriendNameForCell(indexPath)
-//        cell?.userName.text = getFriendNameForCell(indexPath)
-        if let userImgURL = getAvatarFriendForCell(indexPath) {
-            cell?.userImage.image = UIImage(named: userImgURL)
-//            cell?.userImage.load(url: userImgURL)
-        }
-//        cell?.userImage.image = UIImage(named: getAvatarFriendForCell(indexPath))
-
-
-        return cell ?? UITableViewCell()
-    }
-
-    func frameForCellAtIndexPath(_ indexPath: IndexPath) -> CGRect {
-        let cell = self.tableView.cellForRow(at: indexPath) as! FirstCellTableViewCell
-
-        let profileImageFrame = cell.userImage.frame
-
-        return profileImageFrame
-    }
-
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cell = tableView.cellForRow(at: indexPath)
-        return cell?.frame.height ?? 80
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        lettersOfNames.count
-
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView()
-        header.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
-
-        let letter: UILabel = UILabel(frame: CGRect(x: 30, y: 5, width: 20, height: 20))
-        letter.textColor = UIColor.black.withAlphaComponent(0.5)
-        letter.text = lettersOfNames[section]
-        letter.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.light)
-        header.addSubview(letter)
-
-        return header
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        sectionTitle[section]
-    }
-
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return lettersOfNames
-    }
-
 
 }
 
@@ -276,4 +294,33 @@ extension FriendsTableViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 
+}
+
+extension FriendsTableViewController {
+
+    private func subscribeToNotificationRealm() {
+            notifToken = friendsFromRealm.observe { [weak self] (changes) in
+                switch changes {
+                case .initial:
+                    self?.loadFriendsFromRealm()
+
+                case .update:
+                    self?.loadFriendsFromRealm()
+
+                    self?.tableView.beginUpdates()
+
+                    //self?.tableView.endUpdates()
+                case let .error(error):
+                    print(error)
+                }
+            }
+        }
+
+    func loadFriendsFromRealm() {
+            listOfFriends = Array(friendsFromRealm)
+            guard listOfFriends.count != 0 else { return } // проверка, что в реалме что-то есть
+            makeNamesList()
+            sortCharacterOfNamesAlphabet()
+            tableView.reloadData()
+    }
 }

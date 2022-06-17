@@ -7,6 +7,8 @@
 
 import UIKit
 import WebKit
+import CloudKit
+import FirebaseDatabase
 
 class LoginPageController: UIViewController, UITextFieldDelegate {
 
@@ -134,6 +136,33 @@ class LoginPageController: UIViewController, UITextFieldDelegate {
 }
 
 extension LoginPageController: WKNavigationDelegate {
+
+    func write(_ userID: String) {
+        let database = Database.database()
+        let ref = database.reference()
+
+        // read from Firebase
+        ref.observe(.value) { snapshot in
+            let users = snapshot.children.compactMap {$0 as? DataSnapshot}
+            let keys = users.compactMap {$0.key}
+        // check user
+            guard keys.contains(userID) == false else {
+                ref.removeAllObservers()
+
+                let value = users.compactMap {$0.value}
+
+                print("UserID: \(userID) with value:\(value)")
+                return
+            }
+
+
+            ref.child(userID).setValue("")
+            print("new user with ID: \(userID)")
+        }
+
+    }
+
+
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment  else {
@@ -158,6 +187,8 @@ extension LoginPageController: WKNavigationDelegate {
         Session.instance.userID = Int(userID)!
         performSegue(withIdentifier: "showListUsersPhoto", sender: nil)
         decisionHandler(.cancel)
+
+        write(userID)
     }
 
 }
