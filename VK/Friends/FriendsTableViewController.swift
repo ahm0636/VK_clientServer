@@ -224,7 +224,7 @@ class FriendsTableViewController: UITableViewController {
 
             // индекс нажатой ячейки
             if let indexPath = tableView.indexPathForSelectedRow {
-                friend.title = getPhotosFriend(indexPath) as! String //screen title (username)
+                friend.title = (getPhotosFriend(indexPath) as! String) //screen title (username)
 
 //                friend.userID = getFriendID(indexPath)
 //                friend.collectionPhotos = getPhotosFriend(indexPath) // все фотки пользователя
