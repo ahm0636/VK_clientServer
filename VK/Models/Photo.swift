@@ -14,6 +14,7 @@ class Photoo: Object {
     @Persisted var photo: String
     @Persisted var ownerID: String
 
+    
 //    init(photo: String, ownerID: String) {
 //        self.photo = photo
 //        self.ownerID = ownerID

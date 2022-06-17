@@ -72,7 +72,7 @@ class GetPhotosFriend {
                             let realmPost = Photoo()
                             realmPost.photo = urlPhoto
                             realmPost.ownerID = ownerID
-
+ 
                             photosFriend.append(realmPost)
 
                             print("-------------------------------\(photosFriend)")

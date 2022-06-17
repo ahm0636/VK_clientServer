@@ -72,7 +72,7 @@ class GetGroupsList {
                 for i in 0...arrayGroups.response.items.count-1 {
                     let name = ((arrayGroups.response.items[i].name))
                     let logo = arrayGroups.response.items[i].logo
-
+                    
                     let test = Groupp()
                     test.groupName = name
                     test.groupPhoto = logo

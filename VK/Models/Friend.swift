@@ -13,4 +13,5 @@ class Friend: Object {
     @Persisted var friendName: String
     @Persisted var friendAvatar: String
     @Persisted var ownerID: String
+
 }

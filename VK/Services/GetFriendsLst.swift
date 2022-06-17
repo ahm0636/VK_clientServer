@@ -48,6 +48,7 @@ class GetFriendsLst {
                         friendsLs.friendName = name
                         friendsLs.ownerID = id
 
+                        
                         friendList.append(friendsLs)
                     }
                 }
