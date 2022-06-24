@@ -217,36 +217,6 @@ class FriendsTableViewController: UITableViewController {
     }
 
     // MARK: - NAVIGATION
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showListUsersPhoto"{
-            // ссылка объект на контроллер с которого переход
-            guard let friend = segue.destination as? PhotosCollectionViewController else { return }
-
-            // индекс нажатой ячейки
-            if let indexPath = tableView.indexPathForSelectedRow {
-                friend.title = (getPhotosFriend(indexPath) as! String) //screen title (username)
-
-//                friend.userID = getFriendID(indexPath)
-//                friend.collectionPhotos = getPhotosFriend(indexPath) // все фотки пользователя
-            }
-        }
-    }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard
-//            let cell = sender as? UITableViewCell,
-//            let indexPath = tableView.indexPath(for: cell),
-//            let photosViewController = segue.destination as? PhotosCollectionViewController
-//
-//        else {
-//            return
-//        }
-//        let friend = allFriends[indexPath.row]
-//        photosViewController.title = friend.name
-//        photosViewController.friendIndex = indexPath.row
-//
-//    }
-
 }
 
 extension FriendsTableViewController: UIViewControllerAnimatedTransitioning {
