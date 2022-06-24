@@ -168,22 +168,15 @@ extension AllGroupsViewController {
 
     @IBAction func addNewGroup(segue: UIStoryboardSegue) {
         if segue.identifier == "AddGroup" {
-                        // ссылка объект на контроллер с которого переход
                         guard let newGroupFromController = segue.source as? NewGroupTableViewController else { return }
-                        // проверка индекса ячейки
                         if let indexPath = newGroupFromController.tableView.indexPathForSelectedRow {
-                            //добавить новой группы в мои группы из общего списка групп
-//                            let newGroup = newGroupFromController.GroupsList[indexPath.row]
+                            let newGroup = newGroupFromController.groupsList[indexPath.row]
 
-            //                // проверка что группа уже в списке (нужен Equatable)
-//                            guard myGroups.description.contains(newGroup.groupName) == false else { return }
-
-                            //myGroups.append(newGroup)
-
-                            //  добавление новой группы в реалм
+                            guard myGroups.description.contains(newGroup.groupName) == false else { return }
+                            // myGroups.append(newGroup)
                             do {
                                 try realm.write{
-//                                    realm.add(newGroup)
+                                    realm.add(newGroup)
                                 }
                             } catch {
                                 print(error)

@@ -216,6 +216,35 @@ class FriendsTableViewController: UITableViewController {
         return profileImageFrame
     }
 
+    // MARK: - NAVIGATION
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showListUsersPhoto"{
+            // reference object to the controller from which the transition happens
+            guard let friend = segue.destination as? PhotosCollectionViewController else { return }
+
+            // индекс нажатой ячейки
+            if let indexPath = tableView.indexPathForSelectedRow {
+                friend.title = getPhotosFriend(indexPath) as? String //screen title (username)
+                friend.ownerID = getFriendID(indexPath)
+//                friend.collectionPhotos = getPhotosFriend(indexPath) // all friend's photos
+            }
+        }
+    }
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard
+//            let cell = sender as? UITableViewCell,
+//            let indexPath = tableView.indexPath(for: cell),
+//            let photosViewController = segue.destination as? PhotosCollectionViewController
+//
+//        else {
+//            return
+//        }
+//        let friend = allFriends[indexPath.row]
+//        photosViewController.title = friend.name
+//        photosViewController.friendIndex = indexPath.row
+//
+//    }
 
 }
 

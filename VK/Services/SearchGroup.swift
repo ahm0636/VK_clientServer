@@ -40,7 +40,11 @@ class SearchGroup {
                     let name = ((arrayGroups.response.items[i].name))
                     let logo = arrayGroups.response.items[i].logo
                     let id = arrayGroups.response.items[i].id
-//                    searchGroup.append(Groupp.init(groupName: name, groupLogo: logo, id: id))
+
+                    let sGroupLs = Groupp()
+                    sGroupLs.groupPhoto = logo
+                    sGroupLs.groupName = name
+                    searchGroup.append(sGroupLs)
                 }
 
  //               complition(searchGroup)

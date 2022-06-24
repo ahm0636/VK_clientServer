@@ -22,12 +22,22 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
 
     var friendIndex: Int = 0
 
+    var notificationToken: NotificationToken?
 
+    var realm: Realm = {
+        let configrealm = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+        let realm = try! Realm(configuration: configrealm)
+        return realm
+    }()
+
+    lazy var photosFromRealm: Results<Photoo> = {
+        return realm.objects(Photoo.self).filter("ownerID == %@", ownerID)
+    }()
 
     var friend: User!
 
     // MARK: - CUSTON FUNCTIONS
-
+    
     func loadPhotosFromRealm() {
         do {
             let realm = try Realm()
@@ -101,4 +111,19 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
     }
 
 
+}
+
+extension PhotosCollectionViewController {
+    private func subscribeToRealmNotification() {
+        notificationToken = photosFromRealm.observe { [weak self] (changes) in
+            switch changes {
+            case .initial:
+                self?.loadPhotosFromRealm()
+            case .update:
+                self?.loadPhotosFromRealm()
+            case let .error(error):
+                print(error)
+            }
+        }
+    }
 }

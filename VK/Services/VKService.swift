@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 enum Method {
     case friends
     case photos (ownerID: String)
@@ -57,9 +58,7 @@ enum Method {
 
 final class VKService {
 
-
     func loadData(_ method: Method, complition: @escaping () -> Void ) {
-
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"

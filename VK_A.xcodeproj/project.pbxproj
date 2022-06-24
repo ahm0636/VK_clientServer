@@ -10,6 +10,7 @@
 		673022942806E414009A159C /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673022932806E414009A159C /* ActivityIndicatorViewController.swift */; };
 		673E173B2813FCBB00ACAF7A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673E173A2813FCBB00ACAF7A /* Session.swift */; };
 		67400FAF282525530063E02C /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67400FAE282525530063E02C /* Services.swift */; };
+		676637CE28659FA1007723A5 /* UserFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676637CD28659FA1007723A5 /* UserFirebase.swift */; };
 		6777C3F8283A946A00BDCCC9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777C3F7283A946A00BDCCC9 /* Photo.swift */; };
 		6777C3FB283A979C00BDCCC9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6777C3FA283A979C00BDCCC9 /* RealmSwift */; };
 		6777C3FD283A993A00BDCCC9 /* RealmOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777C3FC283A993A00BDCCC9 /* RealmOperations.swift */; };
@@ -62,6 +63,7 @@
 		673022932806E414009A159C /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
 		673E173A2813FCBB00ACAF7A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		67400FAE282525530063E02C /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		676637CD28659FA1007723A5 /* UserFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebase.swift; sourceTree = "<group>"; };
 		6777C3F7283A946A00BDCCC9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		6777C3FC283A993A00BDCCC9 /* RealmOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmOperations.swift; sourceTree = "<group>"; };
 		6777C3FE283A9D2000BDCCC9 /* GetGroupsLst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGroupsLst.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				6777C3F7283A946A00BDCCC9 /* Photo.swift */,
 				6777C43028421EE800BDCCC9 /* Group.swift */,
 				6777C43428422B8C00BDCCC9 /* Friend.swift */,
+				676637CD28659FA1007723A5 /* UserFirebase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				673E173B2813FCBB00ACAF7A /* Session.swift in Sources */,
 				677B9374285C586300F540D0 /* SearchGroup.swift in Sources */,
 				677B936E2853732100F540D0 /* VKService.swift in Sources */,
+				676637CE28659FA1007723A5 /* UserFirebase.swift in Sources */,
 				679C49D527EEF5C2009E3A5A /* FirstCellTableViewCell.swift in Sources */,
 				6777C43528422B8C00BDCCC9 /* Friend.swift in Sources */,
 				67B2BAD62802F16F00A05BB6 /* NewsTableViewController.swift in Sources */,
