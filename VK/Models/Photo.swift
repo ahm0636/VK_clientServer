@@ -13,7 +13,6 @@ class Photoo: Object {
     // updated
     @Persisted var photo: String
     @Persisted var ownerID: String
-
     
 //    init(photo: String, ownerID: String) {
 //        self.photo = photo

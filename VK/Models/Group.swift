@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class Groupp: Object {
-    
+
     @Persisted var groupName: String = ""
     @Persisted var groupPhoto: String = ""
 }
