@@ -216,7 +216,7 @@ class FriendsTableViewController: UITableViewController {
         return profileImageFrame
     }
 
-    // MARK: - NAVIGATION
+
 }
 
 extension FriendsTableViewController: UIViewControllerAnimatedTransitioning {
